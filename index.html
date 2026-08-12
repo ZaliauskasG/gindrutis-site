@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gindrutis</title>
+<meta name="description" content="Gindrutis's corner of the internet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+/* ==========================================================================
+   EDIT THESE TWO THINGS. Nothing else on the page needs to change.
+   ========================================================================== */
+
+// 1. Your photo(s). Add as many as you want — each shows centered,
+//    stacked one after another. Point each at wherever you upload it
+//    in the repo (e.g. "resources/gin-pic.jpg", "resources/gin-pic-2.jpg").
+const PHOTOS = [
+  "resources/gin-pic.jpg",
+];
+
+// 2. Your links. Fill in the real URL for each — leave a value as ""
+//    and that button will just stay hidden until you add it.
+const LINKS = [
+  { label: "Instagram",       url: "" },
+  { label: "Facebook",        url: "" },
+  { label: "LinkedIn",        url: "" },
+  { label: "Spotify",         url: "" },
+  { label: "extrarandom.com", url: "https://extrarandom.com" },
+];
+</script>
+
+<style>
+  :root{
+    --bg:      #FAF8F4;
+    --card:    #FFFFFF;
+    --ink:     #23211D;
+    --ink-soft:#6B6660;
+    --line:    #E7E2D8;
+
+    --display: 'Fraunces', Georgia, serif;
+    --body:    'Inter', system-ui, sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    padding:32px 20px;
+  }
+
+  ::selection{ background:var(--ink); color:var(--bg); }
+
+  .card{
+    width:100%;
+    max-width:400px;
+    text-align:center;
+  }
+
+  .photos{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    margin-bottom:28px;
+  }
+
+  .photo-wrap{
+    max-width:100%;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    line-height:0;
+  }
+
+  .photo-wrap img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:32px;
+    letter-spacing:-.01em;
+    margin:0 0 10px;
+  }
+
+  .tagline{
+    font-family:var(--display);
+    font-style:italic;
+    font-weight:500;
+    font-size:17px;
+    line-height:1.5;
+    color:var(--ink-soft);
+    margin:0 0 34px;
+  }
+
+  .links{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .links a{
+    display:block;
+    padding:13px 20px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    color:var(--ink);
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:500;
+    letter-spacing:.01em;
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+
+  .links a:hover{
+    border-color:var(--ink);
+    transform:translateY(-1px);
+  }
+
+  .links a:active{ transform:translateY(0); }
+
+  .empty-note{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="photos" id="photos"></div>
+
+  <h1>Gindrutis</h1>
+  <p class="tagline">That's right, I literally own this domain.</p>
+
+  <div class="links" id="links"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const photoContainer = document.getElementById('photos');
+  PHOTOS.forEach(function(src, i){
+    const wrap = document.createElement('div');
+    wrap.className = 'photo-wrap';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = "Gindrutis photo " + (i + 1);
+    wrap.appendChild(img);
+    photoContainer.appendChild(wrap);
+  });
+
+  const container = document.getElementById('links');
+  const active = LINKS.filter(l => l.url);
+
+  active.forEach(function(link){
+    const a = document.createElement('a');
+    a.href = link.url;
+    a.textContent = link.label;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    container.appendChild(a);
+  });
+
+  if (!active.length){
+    const p = document.createElement('p');
+    p.className = 'empty-note';
+    p.textContent = 'Fill in the LINKS list at the top of the file to show buttons here.';
+    container.appendChild(p);
+  }
+})();
+</script>
+
+</body>
+</html>
